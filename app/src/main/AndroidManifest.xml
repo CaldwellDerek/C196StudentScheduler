@@ -10,7 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.C196StudentScheduler">
         <activity
-            android:name=".MainActivity"
+            android:name=".UI.TermList"
+            android:exported="false"
+            android:parentActivityName=".UI.MainActivity"
+            android:label="@string/term_list_name"/>
+        <activity
+            android:name=".UI.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
