@@ -21,8 +21,8 @@ public class MainActivity extends AppCompatActivity {
     public void viewSchedule(View view) {
         Intent i = new Intent(MainActivity.this, TermList.class);
         startActivity(i);
-        Term test1 = new Term(1, "test1");
-        Term test2 = new Term(2, "test1");
+        Term test1 = new Term(1, "test1", "06/28/2022", "07/01/2022");
+        Term test2 = new Term(2, "test2", "06/28/2022", "07/01/2022");
         Repository repo = new Repository(getApplication());
         repo.insert(test1);
         repo.insert(test2);

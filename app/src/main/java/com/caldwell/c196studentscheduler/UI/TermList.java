@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,6 +31,7 @@ public class TermList extends AppCompatActivity {
         rv.setLayoutManager(new LinearLayoutManager(this));
         adapter.setTerms(terms);
     }
+
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_termlist, menu);
         return true;
@@ -45,5 +47,7 @@ public class TermList extends AppCompatActivity {
     }
 
     public void addTerm(View view) {
+        Intent i = new Intent(TermList.this, TermDetail.class);
+        startActivity(i);
     }
 }

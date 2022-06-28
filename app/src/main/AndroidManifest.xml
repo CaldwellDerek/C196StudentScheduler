@@ -10,9 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.C196StudentScheduler">
         <activity
-            android:name=".UI.CourseList"
+            android:name=".UI.TermDetail"
             android:exported="false"
             android:parentActivityName=".UI.TermList"/>
+        <activity
+            android:name=".UI.CourseList"
+            android:exported="false"
+            android:parentActivityName=".UI.TermList" />
         <activity
             android:name=".UI.TermList"
             android:exported="false"

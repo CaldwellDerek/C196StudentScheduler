@@ -10,7 +10,7 @@ import androidx.room.RoomDatabase;
 import com.caldwell.c196studentscheduler.DAO.TermDAO;
 import com.caldwell.c196studentscheduler.Entity.Term;
 
-@Database(entities = {Term.class}, version=1, exportSchema = false)
+@Database(entities = {Term.class}, version=2, exportSchema = false)
 public abstract class DatabaseBuilder extends RoomDatabase {
     public abstract TermDAO termDAO();
 
