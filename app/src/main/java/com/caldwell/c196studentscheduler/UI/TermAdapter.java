@@ -17,6 +17,10 @@ import java.util.List;
 
 public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder> {
 
+    private List<Term> mTerms;
+    private final Context context;
+    private final LayoutInflater mInflater;
+
     public class TermViewHolder extends RecyclerView.ViewHolder{
 
         private final TextView termItemView;
@@ -38,10 +42,6 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
             });
         }
     }
-
-    private List<Term> mTerms;
-    private final Context context;
-    private final LayoutInflater mInflater;
 
     public TermAdapter(Context context){
         mInflater = LayoutInflater.from(context);
