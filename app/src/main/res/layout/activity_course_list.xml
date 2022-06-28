@@ -6,4 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".UI.CourseList">
 
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvCourseList"
+        android:layout_width="276dp"
+        android:layout_height="471dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.222"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

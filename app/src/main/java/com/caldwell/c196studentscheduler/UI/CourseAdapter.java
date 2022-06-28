@@ -44,7 +44,6 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
                  }
              });
         }
-
     }
 
     public CourseAdapter(Context context){
@@ -65,7 +64,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CourseViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CourseAdapter.CourseViewHolder holder, int position) {
         if (mCourses != null) {
             Course current = mCourses.get(position);
             String name = current.getCourseName();

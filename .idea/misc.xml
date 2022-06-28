@@ -5,13 +5,17 @@
       <map>
         <entry key="..\:/Users/Derek/Downloads/C196StudentScheduler/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.5259259259259259" />
         <entry key="..\:/Users/Derek/Downloads/C196StudentScheduler/app/src/main/res/drawable/ic_launcher_background.xml" value="0.5259259259259259" />
+        <entry key="..\:/Users/Derek/Downloads/C196StudentScheduler/app/src/main/res/layout/activity_course_detail.xml" value="0.42391304347826086" />
+        <entry key="..\:/Users/Derek/Downloads/C196StudentScheduler/app/src/main/res/layout/activity_course_list.xml" value="0.2674772036474164" />
         <entry key="..\:/Users/Derek/Downloads/C196StudentScheduler/app/src/main/res/layout/activity_course_list_item.xml" value="0.3365036231884058" />
         <entry key="..\:/Users/Derek/Downloads/C196StudentScheduler/app/src/main/res/layout/activity_main.xml" value="0.34193840579710144" />
         <entry key="..\:/Users/Derek/Downloads/C196StudentScheduler/app/src/main/res/layout/activity_term_detail.xml" value="0.5" />
         <entry key="..\:/Users/Derek/Downloads/C196StudentScheduler/app/src/main/res/layout/activity_term_list.xml" value="0.34193840579710144" />
         <entry key="..\:/Users/Derek/Downloads/C196StudentScheduler/app/src/main/res/layout/activity_term_list_item.xml" value="0.34193840579710144" />
         <entry key="..\:/Users/Derek/Downloads/C196StudentScheduler/app/src/main/res/layout/course_list_item.xml" value="0.3365036231884058" />
+        <entry key="..\:/Users/Derek/Downloads/C196StudentScheduler/app/src/main/res/menu/menu_termdetail.xml" value="0.5083333333333333" />
         <entry key="..\:/Users/Derek/Downloads/C196StudentScheduler/app/src/main/res/menu/menu_termlist.xml" value="0.5489583333333333" />
+        <entry key="..\:/Users/Derek/Downloads/C196StudentScheduler/app/src/main/res/menu/termdetail.xml" value="0.5083333333333333" />
       </map>
     </option>
   </component>

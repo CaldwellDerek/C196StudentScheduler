@@ -23,6 +23,7 @@ public class TermList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_term_list);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         RecyclerView rv = findViewById(R.id.term_list_recyclerview);
         Repository repo = new Repository(getApplication());
         List<Term> terms = repo.getAllTerms();
@@ -39,9 +40,11 @@ public class TermList extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:
+            case R.id.home:
                 this.finish();
                 return true;
+            case R.id.menu_refresh:
+                this.recreate();
         }
         return super.onOptionsItemSelected(item);
     }

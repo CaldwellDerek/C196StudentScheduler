@@ -55,5 +55,13 @@ public class MainActivity extends AppCompatActivity {
         repo.insert(test1);
         repo.insert(test2);
         repo.insert(course1);
+        repo.insert(course2);
+        repo.insert(course3);
+
+    }
+
+    public void goToCourseList(View view) {
+        Intent i = new Intent(MainActivity.this, CourseList.class);
+        startActivity(i);
     }
 }

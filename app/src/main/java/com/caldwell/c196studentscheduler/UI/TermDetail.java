@@ -5,6 +5,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
@@ -26,14 +28,27 @@ public class TermDetail extends AppCompatActivity {
     EditText etTermStartDate;
     EditText etTermEndDate;
     Repository repository;
-    
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_term_detail);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         RecyclerView rv = findViewById(R.id.rvTermDetailCourses);
-        repository = new Repository(getApplication());
+        Repository repo = new Repository(getApplication());
+        List<Course> allCourses = repo.getAllCourses();
+        List<Course> filteredCourses = new ArrayList<>();
+        for (Course course : allCourses) {
+            if (course.getTermID() == getIntent().getIntExtra("termID", -1)) {
+                filteredCourses.add(course);
+            }
+        }
+        final CourseAdapter adapter = new CourseAdapter(this);
+        rv.setAdapter(adapter);
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        adapter.setCourses(filteredCourses);
 
         etTermName = findViewById(R.id.etTermName);
         etTermStartDate = findViewById(R.id.etTermStartDate);
@@ -48,27 +63,21 @@ public class TermDetail extends AppCompatActivity {
         etTermStartDate.setText(termStartDate);
         etTermEndDate.setText(termEndDate);
 
-
-        final CourseAdapter adapter = new CourseAdapter(this);
-        rv.setAdapter(adapter);
-        rv.setLayoutManager(new LinearLayoutManager(this));
-        List<Course> allCourses = repository.getAllCourses();
-        List<Course> courses = new ArrayList<>();
-        if (termID != -1) {
-            for (Course course : allCourses){
-                int x = 0;
-                if (course.getTermID() == termID) {
-                    courses.add(x, course);
-                    x ++;
-                }
-            }
-            adapter.setCourses(courses);
-        } else {
-            adapter.setCourses(null);
-        }
-
     }
 
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_termdetail, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     public void termSaveButton(View view) {
         Term term;
