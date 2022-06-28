@@ -1,14 +1,20 @@
 package com.caldwell.c196studentscheduler.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
 import com.caldwell.c196studentscheduler.Database.Repository;
+import com.caldwell.c196studentscheduler.Entity.Course;
 import com.caldwell.c196studentscheduler.Entity.Term;
 import com.caldwell.c196studentscheduler.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TermDetail extends AppCompatActivity {
 
@@ -20,11 +26,14 @@ public class TermDetail extends AppCompatActivity {
     EditText etTermStartDate;
     EditText etTermEndDate;
     Repository repository;
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_term_detail);
+        RecyclerView rv = findViewById(R.id.rvTermDetailCourses);
+        repository = new Repository(getApplication());
 
         etTermName = findViewById(R.id.etTermName);
         etTermStartDate = findViewById(R.id.etTermStartDate);
@@ -39,7 +48,25 @@ public class TermDetail extends AppCompatActivity {
         etTermStartDate.setText(termStartDate);
         etTermEndDate.setText(termEndDate);
 
-        repository = new Repository(getApplication());
+
+        final CourseAdapter adapter = new CourseAdapter(this);
+        rv.setAdapter(adapter);
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        List<Course> allCourses = repository.getAllCourses();
+        List<Course> courses = new ArrayList<>();
+        if (termID != -1) {
+            for (Course course : allCourses){
+                int x = 0;
+                if (course.getTermID() == termID) {
+                    courses.add(x, course);
+                    x ++;
+                }
+            }
+            adapter.setCourses(courses);
+        } else {
+            adapter.setCourses(null);
+        }
+
     }
 
 

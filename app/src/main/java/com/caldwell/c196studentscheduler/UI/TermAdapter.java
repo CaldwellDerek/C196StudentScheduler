@@ -48,6 +48,11 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
         this.context = context;
     }
 
+    public void setTerms(List<Term> terms) {
+        mTerms = terms;
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public TermAdapter.TermViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -75,8 +80,4 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
         }
     }
 
-    public void setTerms(List<Term> terms) {
-        mTerms = terms;
-        notifyDataSetChanged();
-    }
 }

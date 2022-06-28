@@ -31,7 +31,26 @@ public class MainActivity extends AppCompatActivity {
                 "Completed",
                 "Derek Caldwell",
                 "1112223333",
-                "testemail1@testmail.com");
+                "testemail1@testmail.com",
+                1);
+        Course course2 = new Course(2,
+                "C197",
+                "07/01/2022",
+                "07/22/2022",
+                "Completed",
+                "Derek Caldwell",
+                "1112223333",
+                "testemail1@testmail.com",
+                1);
+        Course course3 = new Course(3,
+                "C198",
+                "07/01/2022",
+                "07/22/2022",
+                "Completed",
+                "Derek Caldwell",
+                "1112223333",
+                "testemail1@testmail.com",
+                2);
         Repository repo = new Repository(getApplication());
         repo.insert(test1);
         repo.insert(test2);
