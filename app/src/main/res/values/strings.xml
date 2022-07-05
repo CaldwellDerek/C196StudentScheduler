@@ -1,3 +1,6 @@
 <resources>
-    <string name="app_name">C196StudentScheduler</string>
+    <string name="app_name">Student Scheduler</string>
+    <string name="main_view_schedule_button">View Schedule</string>
+    <string name="term_list_name">Term List</string>
+    <string name="term_list_item_textview">TextView</string>
 </resources>
