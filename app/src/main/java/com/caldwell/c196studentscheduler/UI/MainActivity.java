@@ -1,10 +1,10 @@
 package com.caldwell.c196studentscheduler.UI;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.caldwell.c196studentscheduler.Database.Repository;
 import com.caldwell.c196studentscheduler.Entity.Course;
@@ -60,8 +60,4 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void goToCourseList(View view) {
-        Intent i = new Intent(MainActivity.this, CourseList.class);
-        startActivity(i);
-    }
 }

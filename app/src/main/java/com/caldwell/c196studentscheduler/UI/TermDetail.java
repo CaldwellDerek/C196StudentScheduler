@@ -1,23 +1,29 @@
 package com.caldwell.c196studentscheduler.UI;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.caldwell.c196studentscheduler.Database.Repository;
 import com.caldwell.c196studentscheduler.Entity.Course;
 import com.caldwell.c196studentscheduler.Entity.Term;
 import com.caldwell.c196studentscheduler.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class TermDetail extends AppCompatActivity {
 
@@ -29,14 +35,20 @@ public class TermDetail extends AppCompatActivity {
     EditText etTermStartDate;
     EditText etTermEndDate;
     Repository repository;
-
+    DatePickerDialog.OnDateSetListener startDate;
+    DatePickerDialog.OnDateSetListener endDate;
+    final Calendar calStart = Calendar.getInstance();
+    final Calendar calEnd = Calendar.getInstance();
+    String format;
+    SimpleDateFormat formatter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_term_detail);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        // Filters Courses assigned to selected Term and populates them in the Associated Courses recycler view
         RecyclerView rv = findViewById(R.id.rvTermDetailCourses);
         repository = new Repository(getApplication());
         List<Course> allCourses = repository.getAllCourses();
@@ -51,19 +63,84 @@ public class TermDetail extends AppCompatActivity {
         rv.setLayoutManager(new LinearLayoutManager(this));
         adapter.setCourses(filteredCourses);
 
+        // Assigns Views to variables and populates fields with selected Term info
         etTermName = findViewById(R.id.etTermName);
         etTermStartDate = findViewById(R.id.etTermStartDate);
         etTermEndDate = findViewById(R.id.etTermEndDate);
-
         termID = getIntent().getIntExtra("termID", -1);
         termName = getIntent().getStringExtra("termName");
         termStartDate = getIntent().getStringExtra("termStartDate");
         termEndDate = getIntent().getStringExtra("termEndDate");
-
         etTermName.setText(termName);
         etTermStartDate.setText(termStartDate);
         etTermEndDate.setText(termEndDate);
 
+        // Create OnClick and DateSet listeners for the Term Start Date
+        format = "MM/dd/yy";
+        formatter = new SimpleDateFormat(format, Locale.US);
+        etTermStartDate.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                String entry = etTermStartDate.getText().toString();
+                if (entry.equals("")) {
+                    entry = "07/10/2022";
+                }
+                try {
+                    calStart.setTime(formatter.parse(entry));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                new DatePickerDialog(TermDetail.this, startDate, calStart.get(Calendar.YEAR), calStart.get(Calendar.MONTH), calStart.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
+        startDate = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                calStart.set(Calendar.YEAR, year);
+                calStart.set(Calendar.MONTH, month);
+                calStart.set(Calendar.DAY_OF_MONTH, day);
+                updateTermStartDate();
+            }
+        };
+
+        // Create OnClick and DateSet listeners for End Date
+        etTermEndDate.setOnClickListener(new  View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                String entry = etTermEndDate.getText().toString();
+                if (entry.equals("")) {
+                    entry = "10/10/2022";
+                }
+                try {
+                    calEnd.setTime(formatter.parse(entry));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                new DatePickerDialog(TermDetail.this, endDate, calEnd.get(Calendar.YEAR), calEnd.get(Calendar.MONTH), calEnd.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
+        endDate = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                calEnd.set(Calendar.YEAR, year);
+                calEnd.set(Calendar.MONTH, month);
+                calEnd.set(Calendar.DAY_OF_MONTH, day);
+                updateTermEndDate();
+            }
+        };
+    }
+
+    private void updateTermStartDate() {
+        etTermStartDate.setText(formatter.format(calStart.getTime()));
+    }
+
+    private void updateTermEndDate() {
+        etTermEndDate.setText(formatter.format(calEnd.getTime()));
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -88,7 +165,9 @@ public class TermDetail extends AppCompatActivity {
             repository.insert(term);
         } else {
             term = new Term(termID,etTermName.getText().toString(), etTermStartDate.getText().toString(), etTermEndDate.getText().toString());
-            repository.insert(term);
+            repository.update(term);
         }
+        Intent i = new Intent(TermDetail.this, TermList.class);
+        startActivity(i);
     }
 }
