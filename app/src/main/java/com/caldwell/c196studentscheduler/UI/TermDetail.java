@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -169,5 +170,24 @@ public class TermDetail extends AppCompatActivity {
         }
         Intent i = new Intent(TermDetail.this, TermList.class);
         startActivity(i);
+    }
+
+    public void termDeleteButton(View view) {
+        int x = 0;
+        List<Course> allCourses = repository.getAllCourses();
+        for (Course course : allCourses) {
+            if (course.getTermID() == getIntent().getIntExtra("termID", -1)) {
+                x++;
+            }
+        }
+        if (x >= 1) {
+            Toast toast = Toast.makeText(getApplicationContext(), "This term cannot be deleted, it has courses assigned to it.", Toast.LENGTH_SHORT);
+            toast.show();
+        } else {
+            Term termToDelete = new Term(termID,etTermName.getText().toString(), etTermStartDate.getText().toString(), etTermEndDate.getText().toString());
+            repository.delete(termToDelete);
+            Intent i = new Intent(TermDetail.this, TermList.class);
+            startActivity(i);
+        }
     }
 }

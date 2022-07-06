@@ -77,9 +77,9 @@
             tools:layout_editor_absoluteY="621dp">
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvTermDetailCourses"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/rvTermDetailCourses"/>
+                android:layout_height="match_parent" />
         </ScrollView>
 
 
@@ -89,14 +89,26 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save"
         android:onClick="termSaveButton"
+        android:text="Save Term"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.393" />
+        app:layout_constraintVertical_bias="0.502" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="52dp"
+        android:onClick="termDeleteButton"
+        android:text="Delete Term"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.502" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
